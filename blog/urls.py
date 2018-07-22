@@ -1,4 +1,4 @@
-from django.conf.url import url
+from django.conf.urls import url
 from blog.views import IndexView
 
 urlpatterns = [
