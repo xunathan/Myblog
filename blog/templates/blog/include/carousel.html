@@ -12,7 +12,7 @@
         {% for carousel_page in carousel_page_list %}
             {% if forloop.first %}
                 <div class="item active"> 
-                    <a href="content.html" target="_blank">
+                    <a href="{%url 'article-detail-view' carousel_page.article.id %}" target="_blank">
                         <img src="{{ carousel_page.img}}" alt="" />
                     </a>
                     <div class="carousel-caption">{{carousel_page.title}}
@@ -21,7 +21,7 @@
                 </div>
             {% else %}
                 <div class="item"> 
-                    <a href="content.html" target="_blank">
+                    <a href="{%url 'article-detail-view' carousel_page.article.id %}" target="_blank">
                         <img src="{{ carousel_page.img}}" alt="" />
                     </a>
                     <div class="carousel-caption">{{carousel_page.title}}
