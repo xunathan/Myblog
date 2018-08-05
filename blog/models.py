@@ -34,8 +34,10 @@ class Article(models.Model):
     content = models.TextField();
     view_counter = models.IntegerField(default=0)
     zan_counter = models.IntegerField(default=0)
+    view_times = models.IntegerField(default=0)
 
     create_time = models.DateTimeField(u'创建时间',auto_now_add=True)
+    pub_time = models.DateTimeField(u'发布时间',auto_now_add=True)
 
     class Meta:
         ordering = ['-create_time',]
