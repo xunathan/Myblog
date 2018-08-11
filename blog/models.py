@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class string_with_title(str):
@@ -31,13 +32,13 @@ class Article(models.Model):
     author = models.ForeignKey(User)
     title = models.CharField(max_length=100)
 
-    content = models.TextField();
+    content = RichTextField()
     view_counter = models.IntegerField(default=0)
     zan_counter = models.IntegerField(default=0)
     view_times = models.IntegerField(default=0)
 
     create_time = models.DateTimeField(u'创建时间',auto_now_add=True)
-    pub_time = models.DateTimeField(u'发布时间',auto_now_add=True)
+    #pub_time = models.DateTimeField(default=False, verbose_name=u'发布时间')
 
     class Meta:
         ordering = ['-create_time',]
