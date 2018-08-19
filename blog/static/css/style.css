@@ -44,7 +44,7 @@ li {
 body, input, button, textarea, select {
 	font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
 }
-.container {
+.mycontainer {
 	max-width: 1280px;
 	background-color: #fff;
 	margin: 0 auto;
@@ -60,26 +60,19 @@ body, input, button, textarea, select {
 	user-select: none;
 }
  @media (min-width: 1366px) {
-.container {
+.mycontainer {
 	width: 1280px;
 }
 }
 /*导航样式开始*/
+
 .header {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	width: 190px;
-	background-color: #f6f6f6;
-	z-index: 99;
-	display: block;
+	font-size: 18px;
+	margin-top: 10px;
+	/*background-color: #3399cc;*/
 }
-.header .logo a {
-	display: block;
-	overflow: hidden;
-	height: 124px;
-	line-height: 300px;
-	background: #3399CC url(../images/logo.png) no-repeat 50% 50%;
+.header .logo{
+	font-size: 24px;
 }
 .header .logo a {
 	-moz-transition: all 0.8s ease-in-out;
@@ -192,8 +185,8 @@ body, input, button, textarea, select {
 	float: left;
 }
 .content {
-	margin-right: 320px;
-	margin-left: 190px;
+	margin-right: 400px;
+	margin-left: 50px;
 	padding: 10px 20px 0;
 	min-height: 800px;
 	overflow: hidden;
@@ -918,8 +911,8 @@ textarea::-webkit-scrollbar-thumb {
 /*右侧样式开始*/
 .sidebar {
 	float: left;
-	margin-left: -320px;
-	width: 300px;
+	margin-left: -370px;
+	width: 350px;
 	position: relative;
 	padding-top: 20px;
 }
