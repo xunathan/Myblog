@@ -35,10 +35,20 @@ class Article(models.Model):
     content = RichTextField()
     view_counter = models.IntegerField(default=0)
     zan_counter = models.IntegerField(default=0)
-    view_times = models.IntegerField(default=0)
+    #view_times = models.IntegerField(default=0)
+    tags = models.CharField(max_length=200,null=True,blank=True,
+                            verbose_name=u'标签',help_text=u'用逗号分割')
 
     create_time = models.DateTimeField(u'创建时间',auto_now_add=True)
     #pub_time = models.DateTimeField(default=False, verbose_name=u'发布时间')
+
+    def get_tags(self):
+        tag_list = self.tags.split(',')
+
+        while '' in tag_list:
+            tag_list.remove('')
+
+        return tag_list
 
     class Meta:
         ordering = ['-create_time',]

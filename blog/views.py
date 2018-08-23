@@ -15,7 +15,7 @@ class BaseMixin(object):
             context['website_title'] = settings.WEBSITE_TITLE
 
             #the hot article
-            context['hot_article_list'] = Article.objects.order_by("-view_times")[0:10]
+            context['hot_article_list'] = Article.objects.order_by("-view_counter")[0:10]
         except Exception as e:
             print("load basic error") 
 
@@ -46,7 +46,7 @@ class ArticleView(BaseMixin, DetailView):
         except Article.DoesNotExist:
             raise Http404
         else:
-            article.view_times += 1
+            article.view_counter += 1
             article.save()    
                 
 

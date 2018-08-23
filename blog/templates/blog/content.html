@@ -8,11 +8,13 @@
       <header class="news_header">
         <h2>{{ article.title}}</h2>
         <ul>
-          <li>admin 发布于 2015-06-29</li>
-          <li>栏目：<a href="" title="" target="_blank">网站前端</a></li>
-          <li>来源：<a href="" title="" target="_blank">互联网</a></li>
-          <li>共 <strong>2345</strong> 人围观 </li>
-          <li><strong>123</strong> 个不明物体</li>
+          <li>admin 发布于 {{ article.create_time }}</li>
+            {% for tag in article.get_tags %}
+                <li><a href="" title="" target="_blank"><button type="button" class="btn btn-xs btn-info">{{ tag }}</button></a></li>
+            {% endfor %}
+
+          <li>共 <strong>{{ article.view_counter }}</strong> 人围观 </li>
+
         </ul>
       </header>
       <article class="news_content">
@@ -22,7 +24,14 @@
       </article>
       <div class="reprint">转载请说明出处：<a href="" title="" target="_blank">个人技术博客</a> » <a href="" title="" target="_blank">欢迎来到个人技术博客</a></div>
       <div class="zambia"><a href="javascript:;" name="zambia" rel=""><span class="glyphicon glyphicon-thumbs-up"></span> 赞（0）</a></div>
-      <div class="tags news_tags">标签： <span data-toggle="tooltip" data-placement="bottom" title="查看关于 本站 的文章"><a href="">本站</a></span> <span data-toggle="tooltip" data-placement="bottom" title="查看关于 技术博客 的文章"><a href="">技术博客</a></span> </div>
+      <div class="tags news_tags">标签：
+          {% for tag in article.get_tags %}
+              <span data-toggle="tooltip" data-placement="bottom" title="查看关于 {{ tag }} 的文章">
+                  <a href="">{{ tag }}</a>
+              </span>
+          {% endfor %}
+
+      </div>
       <nav class="page-nav"> <span class="page-nav-prev">上一篇<br />
         <a href="" rel="prev">欢迎来到个人技术博客</a></span> <span class="page-nav-next">下一篇<br />
         <a href="" rel="next">欢迎来到个人技术博客</a></span> </nav>
