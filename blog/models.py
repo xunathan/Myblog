@@ -33,6 +33,7 @@ class Article(models.Model):
     title = models.CharField(max_length=100)
 
     content = RichTextField()
+    summary = models.TextField(verbose_name=u'摘要')
     view_counter = models.IntegerField(default=0)
     zan_counter = models.IntegerField(default=0)
     #view_times = models.IntegerField(default=0)

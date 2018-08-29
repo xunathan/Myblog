@@ -21,7 +21,7 @@ class BaseMixin(object):
 
         return context       
 
-class IndexView(BaseMixin, TemplateView):
+class IndexView(BaseMixin, ListView):
     template_name = 'blog/index.html'
 
     def get_context_data(self,**kwargs):
@@ -30,6 +30,10 @@ class IndexView(BaseMixin, TemplateView):
         #轮播
         kwargs['carousel_page_list'] = Carousel.objects.all()
         return super(IndexView,self).get_context_data(**kwargs)
+
+    def get_queryset(self):
+        article_list = Article.objects.all()
+        return article_list
 
 
 class ArticleView(BaseMixin, DetailView):
