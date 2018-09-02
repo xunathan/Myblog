@@ -6,7 +6,7 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     list_display = ('title','create_time','view_counter','tags')
     list_filter = ('create_time',)
-    fields = ('author','title','content','summary','tags')
+    fields = ('author','title','content','summary','img','tags')
 
 
 class CarouselAdmin(admin.ModelAdmin):

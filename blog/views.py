@@ -5,6 +5,8 @@ from django.views.generic import ListView,TemplateView,DetailView
 from blog.models import Carousel,Article
 from django.conf import settings
 from django.http import Http404
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+
 # Create your views here.
 
 class BaseMixin(object):
@@ -29,10 +31,23 @@ class IndexView(BaseMixin, ListView):
 
         #轮播
         kwargs['carousel_page_list'] = Carousel.objects.all()
+
+        article_list = Article.objects.all()
+        paginator = Paginator(article_list,6,2)
+        pageno = self.request.GET.get('page')
+
+        try:
+            contacts = paginator.page(pageno)
+        except PageNotAnInteger:
+            contacts = paginator.page(1)
+        except EmptyPage:
+            contacts = paginator.page(paginator.num_pages)
+
+        kwargs['contacts'] = contacts
         return super(IndexView,self).get_context_data(**kwargs)
 
     def get_queryset(self):
-        article_list = Article.objects.all()
+        article_list = Article.objects.order_by("-view_counter")[0:5]
         return article_list
 
 

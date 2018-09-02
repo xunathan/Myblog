@@ -40,6 +40,8 @@ class Article(models.Model):
     tags = models.CharField(max_length=200,null=True,blank=True,
                             verbose_name=u'标签',help_text=u'用逗号分割')
 
+    img = models.CharField(max_length=200, verbose_name=u'文章缩略图', default='static/img/logo.jpg')
+
     create_time = models.DateTimeField(u'创建时间',auto_now_add=True)
     #pub_time = models.DateTimeField(default=False, verbose_name=u'发布时间')
 

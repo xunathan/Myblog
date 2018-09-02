@@ -1,7 +1,7 @@
 <div class="row">
-    {% for new_article in article_list %}
+    {% for new_article in contacts.object_list %}
         <div class="news-list">
-        <div class="news-img col-xs-5 col-sm-5 col-md-4"> <a target="_blank" href=""><img src="static/img/logo.jpg" alt=""> </a> </div>
+        <div class="news-img col-xs-5 col-sm-5 col-md-4"> <a target="_blank" href=""><img src="{{ new_article.img }}" alt=""> </a> </div>
         <div class="news-info col-xs-7 col-sm-7 col-md-8">
           <dl>
             <dt> <a href="{%url 'article-detail-view' new_article.id %}" target="_blank" > {{ new_article.title }} </a> </dt>
