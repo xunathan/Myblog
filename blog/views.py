@@ -7,6 +7,8 @@ from django.conf import settings
 from django.http import Http404
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
+import time
+
 # Create your views here.
 
 class BaseMixin(object):
@@ -18,6 +20,10 @@ class BaseMixin(object):
 
             #the hot article
             context['hot_article_list'] = Article.objects.order_by("-view_counter")[0:10]
+
+            now_time = time.strftime('%Y-%m-%d %A',time.localtime(time.time()))
+            context['now_time'] = now_time
+
         except Exception as e:
             print("load basic error") 
 
