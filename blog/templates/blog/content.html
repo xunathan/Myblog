@@ -19,7 +19,7 @@
       </header>
       <article class="news_content">
         <p>{{ article.content | safe}}</p>
-        <p><img src="static/img/carousel/img2.jpg" alt="" title="" /></p>
+        <p><img src="/static/img/carousel/img2.jpg" alt="" title="" /></p>
        
       </article>
       <div class="reprint">转载请说明出处：<a href="" title="" target="_blank">个人技术博客</a> » <a href="" title="" target="_blank">欢迎来到个人技术博客</a></div>
@@ -41,25 +41,25 @@
           <li><a target="_blank" href=""><img src="{{ article.img }}" alt="">
             <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
             </a></li>
-          <li><a target="_blank" href=""><img src="images/img1.jpg" alt="">
+          <li><a target="_blank" href=""><img src="/static/img/carousel/img1.jpg" alt="">
             <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
             </a></li>
-          <li><a target="_blank" href=""><img src="images/img3.jpg" alt="">
+          <li><a target="_blank" href=""><img src="/static/img/carousel/img3.jpg" alt="">
             <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
             </a></li>
-          <li><a target="_blank" href=""><img src="images/img2.jpg" alt="">
+          <li><a target="_blank" href=""><img src="/static/img/carousel/img2.jpg" alt="">
             <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
             </a></li>
-          <li><a target="_blank" href=""><img src="images/img2.jpg" alt="">
+          <li><a target="_blank" href=""><img src="/static/img/carousel/img2.jpg" alt="">
             <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
             </a></li>
-          <li><a target="_blank" href=""><img src="images/img3.jpg" alt="">
+          <li><a target="_blank" href=""><img src="/static/img/carousel/img3.jpg" alt="">
             <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
             </a></li>
-          <li><a target="_blank" href=""><img src="images/img1.jpg" alt="">
+          <li><a target="_blank" href=""><img src="/static/img/carousel/img1.jpg" alt="">
             <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
             </a></li>
-          <li><a target="_blank" href=""><img src="images/logo.jpg" alt="">
+          <li><a target="_blank" href=""><img src="/static/img/logo.jpg" alt="">
             <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
             </a></li>
         </ul>
@@ -89,16 +89,14 @@
         </form>
         <div class="comment-content">
           <ul>
-            <li><span class="face"><img src="images/icon/icon.png" alt=""></span> <span class="text"><strong>技术博客站长</strong> (2015-10-18) 说：<br />
-              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...</span></li>
-            <li><span class="face"><img src="images/icon/icon.png" alt=""></span> <span class="text"><strong>技术博客编辑</strong> (2015-10-18) 说：<br />
-              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 ...</span></li>
-            <li><span class="face"><img src="images/icon/icon.png" alt=""></span> <span class="text"><strong>令狐冲</strong> (2015-10-18) 说：<br />
-              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...</span></li>
-            <li><span class="face"><img src="images/icon/icon.png" alt=""></span> <span class="text"><strong>任盈盈</strong> (2015-10-18) 说：<br />
-              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...</span></li>
-            <li><span class="face"><img src="images/icon/icon.png" alt=""></span> <span class="text"><strong>技术博客站长</strong> (2015-10-18) 说：<br />
-              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 ...</span></li>
+              {% for comment in comment_list %}
+                <li><span class="face"><img src="/static/img/icon/icon.png" alt=""></span>
+                    <span class="text"><strong>{{ comment.user.username }}</strong> ({{ comment.create_time }}) 说：
+                        <br />
+                        {{ comment.text}}
+                    </span>
+                </li>
+              {% endfor %}
           </ul>
         </div>
       </div>

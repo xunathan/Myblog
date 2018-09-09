@@ -2,7 +2,7 @@
 from django.shortcuts import render,get_object_or_404
 from django import template
 from django.views.generic import ListView,TemplateView,DetailView
-from blog.models import Carousel,Article
+from blog.models import Carousel,Article,Comment
 from django.conf import settings
 from django.http import Http404
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -20,6 +20,9 @@ class BaseMixin(object):
 
             #the hot article
             context['hot_article_list'] = Article.objects.order_by("-view_counter")[0:10]
+
+            #the hot comments
+            context['hot_comment_list'] = Comment.objects.all()[0:6]
 
             now_time = time.strftime('%Y-%m-%d %A',time.localtime(time.time()))
             context['now_time'] = now_time
@@ -76,3 +79,9 @@ class ArticleView(BaseMixin, DetailView):
                 
 
         return super(ArticleView,self).get(request,*args,**kwargs)
+
+    def get_context_data(self,*args,**kwargs):
+        pk_value = int(self.kwargs.get(self.pk_url_kwarg,None))
+        kwargs['comment_list'] = self.queryset.get(pk=pk_value).comment_set.all()
+        return super(ArticleView, self).get_context_data(**kwargs)
+

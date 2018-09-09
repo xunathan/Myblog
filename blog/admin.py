@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Carousel,Article
+from blog.models import Carousel,Article,Comment
 
 # Register your models here.
 class ArticleAdmin(admin.ModelAdmin):
@@ -15,8 +15,13 @@ class CarouselAdmin(admin.ModelAdmin):
     list_filter = ('create_time',)
     fields = ('title','img','summary','article')
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('article','create_time','user')
+    list_filter = ('create_time',)
+    fields = ('article','text','user')
 
 
 admin.site.register(Article,ArticleAdmin)
 admin.site.register(Carousel,CarouselAdmin)
+admin.site.register(Comment,CommentAdmin)
 

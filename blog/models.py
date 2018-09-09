@@ -40,7 +40,7 @@ class Article(models.Model):
     tags = models.CharField(max_length=200,null=True,blank=True,
                             verbose_name=u'标签',help_text=u'用逗号分割')
 
-    img = models.CharField(max_length=200, verbose_name=u'文章缩略图', default='static/img/logo.jpg')
+    img = models.CharField(max_length=200, verbose_name=u'文章缩略图', default='/static/img/logo.jpg')
 
     create_time = models.DateTimeField(u'创建时间',auto_now_add=True)
     #pub_time = models.DateTimeField(default=False, verbose_name=u'发布时间')
@@ -77,6 +77,19 @@ class Carousel(models.Model):
         ordering = ['-create_time']
         app_label = string_with_title('blog',u'博客管理')
 
+
+class Comment(models.Model):
+    user = models.ForeignKey(User)
+    article = models.ForeignKey(Article)
+    text = models.TextField()
+    create_time = models.DateTimeField(u'创建时间', auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = verbose_name = u'评论'
+        ordering = ['-create_time',]
+
+    def __str__(self):
+        return self.article.title + '_'+str(self.pk)
 
 
 
