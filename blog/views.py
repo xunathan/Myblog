@@ -81,7 +81,22 @@ class ArticleView(BaseMixin, DetailView):
         return super(ArticleView,self).get(request,*args,**kwargs)
 
     def get_context_data(self,*args,**kwargs):
+        #comment list
         pk_value = int(self.kwargs.get(self.pk_url_kwarg,None))
         kwargs['comment_list'] = self.queryset.get(pk=pk_value).comment_set.all()
+
+        #the next and previous article
+        kwargs['prev_article'] = self.queryset.get(pk=pk_value)
+
+        if pk_value == 1:
+            kwargs['prev_article'] = self.queryset.get(pk=pk_value)
+        else:
+            kwargs['prev_article'] = self.queryset.get(pk=(pk_value-1))
+
+        if pk_value == Article.objects.count():
+            kwargs['next_article'] = self.queryset.get(pk=pk_value)
+        else:
+            kwargs['next_article'] = self.queryset.get(pk=(pk_value+1))
+
         return super(ArticleView, self).get_context_data(**kwargs)
 

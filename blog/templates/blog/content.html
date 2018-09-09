@@ -32,9 +32,14 @@
           {% endfor %}
 
       </div>
-      <nav class="page-nav"> <span class="page-nav-prev">上一篇<br />
-        <a href="" rel="prev">欢迎来到个人技术博客</a></span> <span class="page-nav-next">下一篇<br />
-        <a href="" rel="next">欢迎来到个人技术博客</a></span> </nav>
+      <nav class="page-nav">
+          <span class="page-nav-prev">上一篇<br />
+            <a href="{%url 'article-detail-view' prev_article.id %}" rel="prev">{{ prev_article.title | slice:"20" }}</a>
+          </span>
+          <span class="page-nav-next">下一篇<br />
+            <a href="{%url 'article-detail-view' next_article.id %}" rel="next">{{ next_article.title | slice:"20" }}</a>
+          </span>
+      </nav>
       <div class="content-block related-content visible-lg visible-md">
         <h2 class="title"><strong>相关推荐</strong></h2>
         <ul>
