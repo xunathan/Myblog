@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'',include('blog.urls')),
     url(r'^ckeditor',include('ckeditor_uploader.urls')),
+    url(r'',include('my_auth.urls')),
 ]

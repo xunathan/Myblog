@@ -19,7 +19,7 @@ class BaseMixin(object):
             context['website_title'] = settings.WEBSITE_TITLE
 
             #the hot article
-            context['hot_article_list'] = Article.objects.order_by("-view_counter")[0:10]
+            context['hot_article_list'] = Article.objects.order_by("-view_counter")[0:6]
 
             #the hot comments
             context['hot_comment_list'] = Comment.objects.all()[0:6]
