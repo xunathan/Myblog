@@ -41,19 +41,19 @@
 
                         <ul class="dropdown-menu navbar-right">
                             <li >
-                                <a href=""><span class="glyphicon glyphicon-user"></span>更改头像</a>
+                                <a href=""><span class="glyphicon glyphicon-user"></span> 更改头像</a>
                             </li>
                             <li >
-                                <a href=""><span class="glyphicon glyphicon-lock"></span>更改密码</a>
+                                <a href=""><span class="glyphicon glyphicon-lock"></span> 更改密码</a>
                             </li>
                             <li >
                                 <a href="">
-                                    <span class="glyphicon glyphicon-envelope"></span>消息
+                                    <span class="glyphicon glyphicon-envelope"></span> 消息
                                     <span class="badge" style="background-color: #FC0000;">5</span>
                                 </a>
                             </li>
                             <li >
-                                <a href=""><span class="glyphicon glyphicon-log-out"></span>退出</a>
+                                <a href="" id="logout"><span class="glyphicon glyphicon-log-out"></span> 退出</a>
                             </li>
                         </ul>
 
@@ -165,6 +165,9 @@
                 data:{"username":$("#reg_username").val(),"email":$("#reg_email").val(),
                       "password1":$("#reg_passwd1").val(),"password2":$("#reg_passwd2").val(),},
                 dataType:"json",
+                success:function (data) {
+                    location.reload();
+                },
 
             });
 
@@ -179,7 +182,6 @@
                 dataType:"json",
                 success:function(data){
                     location.reload();
-                    alert(data);
                 },
 
             });
@@ -190,6 +192,19 @@
         $("#log_btn").click(function () {
             $("#login .alert").remove();
         });
+
+        $("#logout").click(function () {
+            $.ajax({
+                type:"POST",
+                url:"/user/logout",
+                success:function(data) {
+                    location.replace("/");
+                },
+            });
+
+            return false;
+        });
+
 
     });
 </script>

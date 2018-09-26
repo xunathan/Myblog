@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.views.generic import View
-#from my_auth.forms import LoginForm
+from my_auth.forms import RegForm
 from django.contrib import auth
 from django.http import HttpResponse
 import json
+from django.core.exceptions import PermissionDenied
 
 
 # Create your views here.
@@ -17,6 +18,8 @@ class UserControl(View):
             return self.register(request)
         elif 'login' == slug:
             return self.login(request)
+        elif 'logout' == slug:
+            return self.logout(request)
 
     def register(self,request):
         username = self.request.POST.get("username","")
@@ -27,12 +30,23 @@ class UserControl(View):
         print(username,email)
         print(password1,password2)
 
+        user_form = RegForm(request.POST)
+
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(user_form.cleaned_data['password1'])
+            new_user.save()
+            user = auth.authenticate(username=username,password=password2)
+            auth.login(request,user)
+            return HttpResponse(json.dumps({"ok":"successfully"}),content_type="application/json")
+        else:
+            return HttpResponse(json.dumps({"error":"Failed"}),content_type="application/json")
+
     def login(self,request):
         username = self.request.POST.get("username", "")
         password = self.request.POST.get("password", "")
 
         user = auth.authenticate(username=username,password=password)
-
 
         errors = []
 
@@ -44,3 +58,10 @@ class UserControl(View):
         mydict = {"errors": errors}
 
         return HttpResponse(json.dumps(mydict),content_type="application/json")
+
+    def logout(self,request):
+        if not request.user.is_authenticated():
+            raise PermissionDenied
+        else:
+            auth.logout(request)
+            return HttpResponse("OK")
