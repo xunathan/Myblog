@@ -13,7 +13,7 @@ class UserControl(View):
     def post(self,request,*args,**kwargs):
         #get the operation
         slug = self.kwargs.get('slug')
-
+        print(slug)
         if 'register' == slug:
             return self.register(request)
         elif 'login' == slug:

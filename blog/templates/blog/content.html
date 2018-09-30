@@ -4,110 +4,225 @@
 {% block content%}
   <!--/超小屏幕可见-->
   <div class="content-wrap"><!--内容-->
-    <div class="content">
-      <header class="news_header">
-        <h2>{{ article.title}}</h2>
-        <ul>
-          <li>admin 发布于 {{ article.create_time }}</li>
-            {% for tag in article.get_tags %}
-                <li><a href="" title="" target="_blank"><button type="button" class="btn btn-xs btn-info">{{ tag }}</button></a></li>
-            {% endfor %}
+      <div class="content">
+          <header class="news_header">
+              <h2>{{ article.title}}</h2>
+              <ul>
+                  <li>admin 发布于 {{ article.create_time }}</li>
+                      {% for tag in article.get_tags %}
+                          <li><a href="" title="" target="_blank">
+                              <button type="button" class="btn btn-xs btn-info">{{ tag }}</button></a>
+                          </li>
+                      {% endfor %}
 
-          <li>共 <strong>{{ article.view_counter }}</strong> 人围观 </li>
+                  <li>共 <strong>{{ article.view_counter }}</strong> 人围观 </li>
+              </ul>
+          </header>
 
-        </ul>
-      </header>
-      <article class="news_content">
-        <p>{{ article.content | safe}}</p>
-        <p><img src="/static/img/carousel/img2.jpg" alt="" title="" /></p>
-       
-      </article>
-      <div class="reprint">转载请说明出处：<a href="" title="" target="_blank">个人技术博客</a> » <a href="" title="" target="_blank">欢迎来到个人技术博客</a></div>
-      <div class="zambia"><a href="javascript:;" name="zambia" rel=""><span class="glyphicon glyphicon-thumbs-up"></span> 赞（0）</a></div>
-      <div class="tags news_tags">标签：
-          {% for tag in article.get_tags %}
-              <span data-toggle="tooltip" data-placement="bottom" title="查看关于 {{ tag }} 的文章">
-                  <a href="">{{ tag }}</a>
-              </span>
-          {% endfor %}
+          <article class="news_content">
+              <p>{{ article.content | safe}}</p>
+          </article>
 
-      </div>
-      <nav class="page-nav">
-          <span class="page-nav-prev">上一篇<br />
-            <a href="{%url 'article-detail-view' prev_article.id %}" rel="prev">{{ prev_article.title | slice:"20" }}</a>
-          </span>
-          <span class="page-nav-next">下一篇<br />
-            <a href="{%url 'article-detail-view' next_article.id %}" rel="next">{{ next_article.title | slice:"20" }}</a>
-          </span>
-      </nav>
-      <div class="content-block related-content visible-lg visible-md">
-        <h2 class="title"><strong>相关推荐</strong></h2>
-        <ul>
-          <li><a target="_blank" href=""><img src="{{ article.img }}" alt="">
-            <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="/static/img/carousel/img1.jpg" alt="">
-            <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="/static/img/carousel/img3.jpg" alt="">
-            <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="/static/img/carousel/img2.jpg" alt="">
-            <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="/static/img/carousel/img2.jpg" alt="">
-            <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="/static/img/carousel/img3.jpg" alt="">
-            <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="/static/img/carousel/img1.jpg" alt="">
-            <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-          <li><a target="_blank" href=""><img src="/static/img/logo.jpg" alt="">
-            <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-        </ul>
-      </div>
-      <div class="content-block comment">
-        <h2 class="title"><strong>评论</strong></h2>
-        <form action="comment.php" method="post" class="form-inline" id="comment-form">
-          <div class="comment-title">
-            <div class="form-group">
-              <label for="commentName">昵称：</label>
-              <input type="text" name="commentName" class="form-control" id="commentName" placeholder="技术博客">
-            </div>
-            <div class="form-group">
-              <label for="commentEmail">邮箱：</label>
-              <input type="email" name="commentEmail" class="form-control" id="commentEmail" placeholder="admin@xxxx.com">
-            </div>
+          <div class="reprint">转载请说明出处：
+              <a href="" title="" target="_blank">个人技术博客</a> »
+              <a href="" title="" target="_blank">欢迎来到个人技术博客</a>
           </div>
-          <div class="comment-form">
-            <textarea placeholder="你的评论可以一针见血" name="commentContent"></textarea>
-            <div class="comment-form-footer">
-              <div class="comment-form-text">请先 <a href="javascript:;">登录</a> 或 <a href="javascript:;">注册</a>，也可匿名评论 </div>
-              <div class="comment-form-btn">
-                <button type="submit" class="btn btn-default btn-comment">提交评论</button>
-              </div>
-            </div>
+
+          <div class="zambia">
+              <a href="javascript:;" name="zambia" rel="">
+                  <span class="glyphicon glyphicon-thumbs-up"></span> 赞（0）
+              </a>
           </div>
-        </form>
-        <div class="comment-content">
-          <ul>
-              {% for comment in comment_list %}
-                <li><span class="face"><img src="/static/img/icon/icon.png" alt=""></span>
-                    <span class="text"><strong>{{ comment.user.username }}</strong> ({{ comment.create_time }}) 说：
-                        <br />
-                        {{ comment.text}}
-                    </span>
-                </li>
+
+          <div class="tags news_tags">标签：
+              {% for tag in article.get_tags %}
+                  <span data-toggle="tooltip" data-placement="bottom" title="查看关于 {{ tag }} 的文章">
+                      <a href="">{{ tag }}</a>
+                  </span>
               {% endfor %}
-          </ul>
-        </div>
+          </div>
+
+          <nav class="page-nav">
+              <span class="page-nav-prev">上一篇<br />
+                <a href="{%url 'article-detail-view' prev_article.id %}" rel="prev">{{ prev_article.title | slice:"20" }}</a>
+              </span>
+              <span class="page-nav-next">下一篇<br />
+                <a href="{%url 'article-detail-view' next_article.id %}" rel="next">{{ next_article.title | slice:"20" }}</a>
+              </span>
+          </nav>
+
+          <div class="content-block related-content visible-lg visible-md">
+              <h2 class="title"><strong>相关推荐</strong></h2>
+              <ul>
+                  <li>
+                      <a target="_blank" href=""><img src="{{ article.img }}" alt="">
+                          <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+                      </a>
+                  </li>
+
+                  <li>
+                      <a target="_blank" href=""><img src="/static/img/carousel/img1.jpg" alt="">
+                          <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+                      </a>
+                  </li>
+
+                  <li>
+                      <a target="_blank" href=""><img src="/static/img/carousel/img3.jpg" alt="">
+                          <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+                      </a>
+                  </li>
+
+                  <li>
+                      <a target="_blank" href=""><img src="/static/img/carousel/img2.jpg" alt="">
+                          <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+                      </a>
+                  </li>
+
+                  <li>
+                      <a target="_blank" href=""><img src="/static/img/carousel/img3.jpg" alt="">
+                          <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+                      </a>
+                  </li>
+
+                  <li>
+                      <a target="_blank" href=""><img src="/static/img/carousel/img1.jpg" alt="">
+                          <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+                      </a>
+                  </li>
+
+                  <li>
+                      <a target="_blank" href=""><img src="/static/img/logo.jpg" alt="">
+                          <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+                      </a>
+                  </li>
+              </ul>
+          </div>
+
+          <div class="content-block comment">
+              <h2 class="title"><strong>评论</strong></h2>
+              <form id="comment-form" class="form-inline" action="" method="post" role="form">
+                  <div class="comment-form">
+                      <textarea id="comment" placeholder="请输入你的评论" name="commentContent"></textarea>
+                      <div class="comment-form-footer">
+                          {% if not user.is_authenticated %}
+                              <div class="comment-form-text">请先
+                                  <a href="#" data-toggle="modal" data-target="#com_login">登录</a> 或
+                                  <a href="#" data-toggle="modal" data-target="#com_register">注册</a>
+                              </div>
+                          {% endif %}
+                          <div class="comment-form-btn">
+                              <button id="sub_comment" type="submit" class="btn btn-default btn-comment">提交评论</button>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+              <div class="comment-content">
+                  <ul>
+                      {% for comment in comment_list %}
+                          <li><span class="face"><img src="/static/img/icon/icon.png" alt=""></span>
+                              <span class="text"><strong>{{ comment.user.username }}</strong> ({{ comment.create_time }}) 说：
+                                    <br /> {{ comment.text}}
+                              </span>
+                          </li>
+                      {% endfor %}
+                  </ul>
+            </div>
+          </div>
       </div>
-    </div>
   </div>
 
+
+
+
+    <div id="com_login" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h1 class="text-center">登陆</h1>
+            </div>
+
+            <div class="modal-body">
+                <form class="form-group" action="" id="com_login_form" method="post" role="form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="log_username">用户名</label>
+                        <input id="log_username" class="form-control" type="text" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="log_passwd">密码</label>
+                        <input id="log_passwd" class="form-control" type="password" placeholder="">
+                        <div>{{ form.password }}</div>
+                    </div>
+
+                    <div class="text-right">
+                        <button id="log_btn" class="btn btn-primary" type="submit">登陆</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+
+                    <a href="" data-target="#register" data-toggle="modal" data-dismiss="modal">还没有账号？点我注册</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- 注册窗口-->
+    <div id="com_register" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-title">
+                    <h1 class="text-center">注册</h1>
+                </div>
+
+                <div class="modal-body">
+                    <form id="com_register_form" class="form-group" method="post" role="form" action="">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="reg_username">用户名</label>
+                            <input id="reg_username" class="form-control" type="text" placeholder="6-15位字母或数字组合">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg_email">邮箱</label>
+                            <input id="reg_email" class="form-control" type="email" placeholder="example:123@123.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg_passwd1">密码</label>
+                            <input id="reg_passwd1" class="form-control" type="password" placeholder="至少6位数字或字母">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg_passwd2">确认密码</label>
+                            <input id="reg_passwd2" class="form-control" type="password" placeholder="至少6位数字或字母">
+                        </div>
+
+                        <div class="text-right">
+                            <button class="btn btn-primary" type="submit">提交</button>
+                            <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                        </div>
+
+                        <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登陆</a>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 {% include "./include/aside_bar.html" %}
 {% endblock%}
@@ -221,6 +336,58 @@ $(function(){
         });   
         return false;   
     });   
-})
+});
+
+$(function () {
+    $("#com_register_form").submit(function () {
+        $.ajax({
+            type:"POST",
+            url:"/user/register",
+            data:{"username":$("#reg_username").val(),"email":$("#reg_email").val(),
+                  "password1":$("#reg_passwd1").val(),"password2":$("#reg_passwd2").val(),},
+            dataType:"json",
+            success:function (data) {
+                location.reload();
+            },
+
+        });
+
+        return false;
+    });
+
+    $("#com_login_form").submit(function () {
+        $.ajax({
+            type:"POST",
+            url:"/user/login",
+            data:{"username":$("#log_username").val(),"password":$("#log_passwd").val(),},
+            dataType:"json",
+            success:function(data){
+                location.reload();
+            },
+
+        });
+
+        return false;
+    });
+
+    $("#log_btn").click(function () {
+        $("#login .alert").remove();
+    });
+});
+
+
+$(function () {
+    $("#comment-form").submit(function () {
+        $.ajax({
+            type:"POST",
+            url:"/comment/{{ article.id }}",
+            data:{"content":$("#comment").val()},
+            success:function () {
+                location.reload();
+            },
+        });
+        return false;
+    });
+});
 </script>
 {% endblock %}

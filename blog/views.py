@@ -1,10 +1,10 @@
 #-*- coding:utf-8 -*-
 from django.shortcuts import render,get_object_or_404
 from django import template
-from django.views.generic import ListView,TemplateView,DetailView
+from django.views.generic import ListView,TemplateView,DetailView,View
 from blog.models import Carousel,Article,Comment
 from django.conf import settings
-from django.http import Http404
+from django.http import Http404,HttpResponse
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 import time
@@ -100,3 +100,19 @@ class ArticleView(BaseMixin, DetailView):
 
         return super(ArticleView, self).get_context_data(**kwargs)
 
+class CommentView(View):
+    def post(self,request,*args,**kwargs):
+        user = self.request.user
+
+        text = self.request.POST.get("content","")
+
+        pk_value = int(self.kwargs.get("pk", ""))
+
+        article = Article.objects.get(pk=pk_value)
+        print(pk_value)
+        print(user)
+        print(text)
+        Comment.objects.create(user=user,
+                               article=article,
+                               text=text)
+        return HttpResponse("OK")
