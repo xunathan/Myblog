@@ -53,6 +53,7 @@
                                 </a>
                             </li>
                             <li >
+                                {% csrf_token %}
                                 <a href="" id="logout"><span class="glyphicon glyphicon-log-out"></span> 退出</a>
                             </li>
                         </ul>
@@ -163,7 +164,8 @@
                 type:"POST",
                 url:"/user/register",
                 data:{"username":$("#reg_username").val(),"email":$("#reg_email").val(),
-                      "password1":$("#reg_passwd1").val(),"password2":$("#reg_passwd2").val(),},
+                      "password1":$("#reg_passwd1").val(),"password2":$("#reg_passwd2").val(),
+                        'csrfmiddlewaretoken':$('[name="csrfmiddlewaretoken"]').val()},
                 dataType:"json",
                 success:function (data) {
                     location.reload();
@@ -178,7 +180,8 @@
             $.ajax({
                 type:"POST",
                 url:"/user/login",
-                data:{"username":$("#log_username").val(),"password":$("#log_passwd").val(),},
+                data:{"username":$("#log_username").val(),"password":$("#log_passwd").val(),
+                        'csrfmiddlewaretoken':$('[name="csrfmiddlewaretoken"]').val()},
                 dataType:"json",
                 success:function(data){
                     location.reload();
@@ -197,6 +200,7 @@
             $.ajax({
                 type:"POST",
                 url:"/user/logout",
+                data:{'csrfmiddlewaretoken':'{{csrf_token}}'},
                 success:function(data) {
                     location.replace("/");
                 },

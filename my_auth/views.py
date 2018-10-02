@@ -26,7 +26,7 @@ class UserControl(View):
         email = self.request.POST.get("email","")
         password1 = self.request.POST.get("password1","")
         password2 = self.request.POST.get("password2", "")
-
+        print(username)
         print(username,email)
         print(password1,password2)
 

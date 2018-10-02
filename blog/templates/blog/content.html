@@ -101,13 +101,14 @@
           <div class="content-block comment">
               <h2 class="title"><strong>评论</strong></h2>
               <form id="comment-form" class="form-inline" action="" method="post" role="form">
+                  {% csrf_token %}
                   <div class="comment-form">
                       <textarea id="comment" placeholder="请输入你的评论" name="commentContent"></textarea>
                       <div class="comment-form-footer">
                           {% if not user.is_authenticated %}
                               <div class="comment-form-text">请先
-                                  <a href="#" data-toggle="modal" data-target="#com_login">登录</a> 或
-                                  <a href="#" data-toggle="modal" data-target="#com_register">注册</a>
+                                  <a href="#" data-toggle="modal" data-target="#login">登录</a> 或
+                                  <a href="#" data-toggle="modal" data-target="#register">注册</a>
                               </div>
                           {% endif %}
                           <div class="comment-form-btn">
@@ -131,99 +132,6 @@
           </div>
       </div>
   </div>
-
-
-
-
-    <div id="com_login" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button class="close" data-dismiss="modal">
-                    <span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h1 class="text-center">登陆</h1>
-            </div>
-
-            <div class="modal-body">
-                <form class="form-group" action="" id="com_login_form" method="post" role="form">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="log_username">用户名</label>
-                        <input id="log_username" class="form-control" type="text" placeholder="">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="log_passwd">密码</label>
-                        <input id="log_passwd" class="form-control" type="password" placeholder="">
-                        <div>{{ form.password }}</div>
-                    </div>
-
-                    <div class="text-right">
-                        <button id="log_btn" class="btn btn-primary" type="submit">登陆</button>
-                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
-                    </div>
-
-                    <a href="" data-target="#register" data-toggle="modal" data-dismiss="modal">还没有账号？点我注册</a>
-                </form>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <!-- 注册窗口-->
-    <div id="com_register" class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button class="close" data-dismiss="modal">
-                        <span>&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-title">
-                    <h1 class="text-center">注册</h1>
-                </div>
-
-                <div class="modal-body">
-                    <form id="com_register_form" class="form-group" method="post" role="form" action="">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <label for="reg_username">用户名</label>
-                            <input id="reg_username" class="form-control" type="text" placeholder="6-15位字母或数字组合">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="reg_email">邮箱</label>
-                            <input id="reg_email" class="form-control" type="email" placeholder="example:123@123.com">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="reg_passwd1">密码</label>
-                            <input id="reg_passwd1" class="form-control" type="password" placeholder="至少6位数字或字母">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="reg_passwd2">确认密码</label>
-                            <input id="reg_passwd2" class="form-control" type="password" placeholder="至少6位数字或字母">
-                        </div>
-
-                        <div class="text-right">
-                            <button class="btn btn-primary" type="submit">提交</button>
-                            <button class="btn btn-danger" data-dismiss="modal">取消</button>
-                        </div>
-
-                        <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登陆</a>
-                    </form>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
 
 {% include "./include/aside_bar.html" %}
 {% endblock%}
@@ -328,7 +236,8 @@ $(function(){
         $.ajax({   
             type:"POST",   
             url:"/zan",
-            data:{"id":{{ article.id }}},
+            data:{"id":{{ article.id }},
+                    'csrfmiddlewaretoken':'{{csrf_token}}'},
             cache:false, //不缓存此页面   
             success:function(data){
                 location.reload();
@@ -343,49 +252,12 @@ $(function(){
 });
 
 $(function () {
-    $("#com_register_form").submit(function () {
-        $.ajax({
-            type:"POST",
-            url:"/user/register",
-            data:{"username":$("#reg_username").val(),"email":$("#reg_email").val(),
-                  "password1":$("#reg_passwd1").val(),"password2":$("#reg_passwd2").val(),},
-            dataType:"json",
-            success:function (data) {
-                location.reload();
-            },
-
-        });
-
-        return false;
-    });
-
-    $("#com_login_form").submit(function () {
-        $.ajax({
-            type:"POST",
-            url:"/user/login",
-            data:{"username":$("#log_username").val(),"password":$("#log_passwd").val(),},
-            dataType:"json",
-            success:function(data){
-                location.reload();
-            },
-
-        });
-
-        return false;
-    });
-
-    $("#log_btn").click(function () {
-        $("#login .alert").remove();
-    });
-});
-
-
-$(function () {
     $("#comment-form").submit(function () {
         $.ajax({
             type:"POST",
             url:"/comment/{{ article.id }}",
-            data:{"content":$("#comment").val()},
+            data:{"content":$("#comment").val(),
+                'csrfmiddlewaretoken':'{{csrf_token}}'},
             success:function () {
                 location.reload();
             },
