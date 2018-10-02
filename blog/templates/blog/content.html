@@ -29,8 +29,8 @@
           </div>
 
           <div class="zambia">
-              <a href="javascript:;" name="zambia" rel="">
-                  <span class="glyphicon glyphicon-thumbs-up"></span> 赞（0）
+              <a href="" name="zambia" rel="">
+                  <span class="glyphicon glyphicon-thumbs-up"></span> 赞（{{ article.zan_counter }}）
               </a>
           </div>
 
@@ -121,7 +121,8 @@
                       {% for comment in comment_list %}
                           <li><span class="face"><img src="/static/img/icon/icon.png" alt=""></span>
                               <span class="text"><strong>{{ comment.user.username }}</strong> ({{ comment.create_time }}) 说：
-                                    <br /> {{ comment.text}}
+                                    <br /> {{ comment.text}} <br>
+                                    <hr>
                               </span>
                           </li>
                       {% endfor %}
@@ -323,16 +324,19 @@ $(function(){
     $(".content .zambia a").click(function(){   
         var zambia = $(this);   
         var id = zambia.attr("rel"); //对应id   
-        zambia.fadeOut(1000); //渐隐效果   
+        //zambia.fadeOut(1000); //渐隐效果
         $.ajax({   
             type:"POST",   
-            url:"zambia.php",   
-            data:"id="+id,   
+            url:"/zan",
+            data:{"id":{{ article.id }}},
             cache:false, //不缓存此页面   
-            success:function(data){   
-                zambia.html(data);   
-                zambia.fadeIn(1000); //渐显效果   
-            }   
+            success:function(data){
+                location.reload();
+            },
+            error:function (XMLHttpRequest) {
+                alert(XMLHttpRequest.responseText);
+            },
+
         });   
         return false;   
     });   

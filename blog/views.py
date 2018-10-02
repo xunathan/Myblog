@@ -116,3 +116,23 @@ class CommentView(View):
                                article=article,
                                text=text)
         return HttpResponse("OK")
+
+class ZanView(View):
+    def post(self,request,*args,**kwargs):
+        article_id = int(self.request.POST.get("id",""))
+        user = self.request.user
+        print(user)
+
+        if not user.is_authenticated():
+            print("haha")
+            return HttpResponse("请先登陆!",status=403)
+        print(article_id)
+        article = Article.objects.get(pk=article_id)
+
+        article.zan_counter += 1
+        article.save()
+
+        return HttpResponse("OK")
+
+
+
