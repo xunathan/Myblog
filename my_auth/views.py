@@ -20,6 +20,8 @@ class UserControl(View):
             return self.login(request)
         elif 'logout' == slug:
             return self.logout(request)
+        elif 'passwd_change' == slug:
+            return self.change_password(request)
 
     def register(self,request):
         username = self.request.POST.get("username","")
