@@ -135,4 +135,5 @@ class ZanView(View):
         return HttpResponse("OK")
 
 
-
+def google_yanzheng(request):
+    return render(request,'blog/googlef5c50adcb3c8f8e0.html')

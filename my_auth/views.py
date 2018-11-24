@@ -67,3 +67,16 @@ class UserControl(View):
         else:
             auth.logout(request)
             return HttpResponse("OK")
+
+    def change_password(self, request):
+        if not request.user.is_authenticated():
+            raise PermissionDenied
+        old_passwd = self.request.POST.get("old_passwd", "")
+        new_passwd = self.request.POST.get("new_passwd", "")
+
+        print(old_passwd)
+        print(new_passwd)
+        errors=['OK']
+        mydict = {"errors": errors}
+
+        return HttpResponse(json.dumps(mydict), content_type="application/json")

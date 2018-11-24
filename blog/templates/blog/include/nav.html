@@ -1,4 +1,5 @@
 {% url 'index-view' as index_url %}
+{% url 'change-posswd-view' as change_passwd_url %}
 
 <nav class="navbar nav-deafult navbar-static-top header" role="navigation">
     <div class="container">
@@ -44,7 +45,7 @@
                                 <a href=""><span class="glyphicon glyphicon-user"></span> 更改头像</a>
                             </li>
                             <li >
-                                <a href=""><span class="glyphicon glyphicon-lock"></span> 更改密码</a>
+                                <a href="{{ change_passwd_url }}"><span class="glyphicon glyphicon-lock"></span> 更改密码</a>
                             </li>
                             <li >
                                 <a href="">
